@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.clientside.project.modules.member.MemberMpp">
+
+	<resultMap id="resultMapObj" type="com.clientside.project.modules.member.Member"></resultMap> <!-- mybatis인가 이거 사용해주기 위해 쓰는거임 -->
+
+
+
+	<sql id="selectCommon">
+	FROM
+		infrMember a
+		LEFT JOIN
+		infrMemberPhone b ON a.ifmmSeq = b.ifmmSeq
+		LEFT JOIN
+		infrMemberEmail c ON a.ifmmSeq = c.ifmmSeq
+		WHERE 1=1
+		<choose>
+			<!-- <when test="shOptionDate == 0">AND a.regDateTime disabled #{shDateStart} AND #{shDateEnd}</when> -->
+			<when test="shOptionDate == 1">AND a.regDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<when test="shOptionDate == 2">AND a.modDateTime BETWEEN #{shDateStart} AND #{shDateEnd}</when>
+			<!-- <when test="shOptionDate == 3">AND a.ifmmDob BETWEEN #{shDateStart} AND #{shDateEnd}</when> -->
+			<!-- <when test="shJoinOption == 5">AND a.regDateTime LIKE concat('%',#{shJoinValue},'%')</when> -->
+			<!-- <when test="shJoinOption == 6">AND regDateTime LIKE concat('%',#{shJoinValue},'%')</when> -->
+		</choose>
+		<choose>
+			<when test="shOption == 1">AND a.ifmmName LIKE concat('%',#{shValue}, '%')</when>
+			<when test="shOption == 2">AND a.ifmmId LIKE concat('%',#{shValue}, '%')</when>
+			<when test="shOption == 3">AND b.ifmpNumber LIKE concat('%',#{shValue}, '%')</when>
+			<when test="shOption == 4">AND c.ifmeEmailFull LIKE concat('%',#{shValue}, '%')</when>
+			<!-- <when test="shOption == 5">AND a.regDateTime LIKE concat('%',#{shValue}, '%')</when> -->
+		</choose>
+
+	</sql>
+
+	<select id="selectOneCount" resultType="Integer">
+		SELECT
+			count(*)
+		<include refid="selectCommon" />
+
+	</select>
+
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT
+		a.ifmmSeq
+		,a.ifmmName
+		,a.ifmmId
+		,a.ifmmDelNy
+		,b.ifmpNumber
+		,c.ifmeEmailFull
+		,a.regDateTime
+		<!-- ,a.ifmmPassword -->
+		<include refid="selectCommon" />
+		limit #{startRnumForMysql}, #{rowNumToShow}
+	</select>
+
+	<select id="selectListNation" resultMap="resultMapObj">
+		SELECT
+		a.ifnSeq
+		,a.ifnName
+		FROM
+		infrNationality a
+		WHERE 1 = 1
+	</select>
+
+
+
+
+	<insert id="insert">
+		INSERT INTO infrMember (
+		ifmmName
+		,ifmmNameEng
+		,ifmmId
+		,ifmmDelNy
+		,ifmmPassword
+		,ifmmPassword2
+		,ifmmDob
+		,ifmmGenderCd
+		,regDateTime
+		,ifmmEmailConsentNy
+		,originalFileName
+		,uuidFileName
+		)
+		VALUES (
+		#{ifmmName}
+		,#{ifmmNameEng}
+		,#{ifmmId}
+		,0
+		,#{ifmmPassword}
+		,#{ifmmPassword2}
+		,#{ifmmDob}
+		,#{ifmmGenderCd}
+		,#{regDateTime}
+		,#{ifmmEmailConsentNy}
+		,#{originalFileName}
+		,#{uuidFileName}
+		)
+		<selectKey resultType="String" keyProperty="ifmmSeq" order="AFTER">
+			SELECT last_insert_id()
+		</selectKey>
+	</insert>
+
+	<insert id="insertMemberPhone">
+		insert into infrMemberPhone(
+		ifmpNumber
+		,ifmpTelecomCd
+		,ifmmSeq
+		) values (
+		#{ifmpNumber}
+		,#{ifmpTelecomCd}
+		,#{ifmmSeq}
+		)
+	</insert>
+
+	<insert id="insertMemberEmail">
+		insert into infrMemberEmail(
+		ifmeEmailFull
+		,ifmmSeq
+		)
+		values (
+		#{ifmeEmailFull}
+		,#{ifmmSeq}
+		)
+	</insert>
+
+	<insert id="insertMemberAddress">
+		insert into infrMemberAddress(
+		ifmaAddress1
+		,ifmaAddress2
+		,ifmaZipcode
+		,ifmaLat
+		,ifmaLng
+		,ifmmSeq
+		)
+		values (
+		#{ifmaAddress1}
+		,#{ifmaAddress2}
+		,#{ifmaZipcode}
+		,#{ifmaLat}
+		,#{ifmaLng}
+		,#{ifmmSeq}
+		)
+	</insert>
+
+	<insert id="insertMemberNationality">
+		insert into infrMemberNationality(
+		ifnSeq
+		,ifmmSeq
+		)
+		values (
+		#{ifnSeq}
+		,#{ifmmSeq}
+		)
+	</insert>
+
+
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+		a.ifmmSeq
+		,a.ifmmName
+		,a.ifmmNameEng
+		,a.ifmmId
+		,a.ifmmDelNy
+		,a.ifmmPassword
+		,a.ifmmPassword2
+		,a.ifmmDob
+		,a.regDateTime
+		,(select ifcdName from infrCode where ifcdSeq = a.ifmmEmailConsentNy) as ifmmMarketing
+		,a.originalFileName
+		,a.uuidFileName
+		,b.ifmpNumber
+		,(select ifcdName from infrCode where ifcdSeq = b.ifmpTelecomCd) as ifmpTelecompany
+		,c.ifmeEmailFull
+		,d.ifmaAddress1
+		,d.ifmaAddress2
+		,d.ifmaZipcode
+		,d.ifmaLat
+		,d.ifmaLng
+		,(select ifnName from infrNationality where ifnSeq = e.ifnSeq) as ifnNation
+		,g.ifcdName
+		FROM
+		infrMember a
+		LEFT JOIN
+		infrMemberPhone b ON a.ifmmSeq = b.ifmmSeq
+		LEFT JOIN
+		infrMemberEmail c ON a.ifmmSeq = c.ifmmSeq
+		LEFT JOIN
+		infrMemberAddress d ON a.ifmmSeq = d.ifmmSeq
+		LEFT JOIN
+		infrMemberNationality e ON a.ifmmSeq = e.ifmmSeq
+		LEFT JOIN
+		infrCode g ON g.ifcdSeq = a.ifmmGenderCd
+		WHERE
+		1 = 1
+		AND a.ifmmSeq = #{ifmmSeq}
+	</select>
+
+	<!-- <select id="selectGender" resultMap="resultMapObj"> select a.ifcdSeq 
+		,a.ifcdName FROM infrCode as a LEFT JOIN infrCodeGroup b ON b.ifcgSeq = a.ifcgSeq 
+		LEFT JOIN infrMember c ON a.ifcdSeq = c.ifmmGenderCd </select> -->
+
+	<update id="update">
+		UPDATE
+		infrMember  <!-- 진짜 중요한게 테이블 이름틀리면 505 Error 불변임 -->
+		SET
+		ifmmName = #{ifmmName} <!-- 여기다 여러개 넣으면 여러개 수정 함께 가능 -->
+		,ifmmNameEng = #{ifmmNameEng}
+		,ifmmGenderCd = #{ifmmGenderCd}
+		,ifmmEmailConsentNy = #{ifmmEmailConsentNy}
+		,ifmmId = #{ifmmId}
+		,ifmmPassword = #{ifmmPassword} <!-- 여기다 여러개 넣으면 여러개 수정 함께 가능 -->
+		,regDateTime = #{regDateTime}
+		WHERE
+		1 = 1
+		AND ifmmSeq = #{ifmmSeq}
+	</update>
+
+	<update id="updateNumber">
+		UPDATE
+		infrMemberPhone
+		SET
+		ifmpNumber = #{ifmpNumber}
+		,ifmpTelecomCd = #{ifmpTelecomCd}
+		WHERE
+		1 = 1
+		AND ifmmSeq = #{ifmmSeq}
+	</update>
+
+	<update id="updateEmail">
+		UPDATE
+		infrMemberEmail
+		SET
+		ifmeEmailFull = #{ifmeEmailFull}
+		WHERE
+		1 = 1
+		AND ifmmSeq = #{ifmmSeq}
+	</update>
+	
+	<update id="updateMemberAddress">
+		UPDATE
+		infrMemberAddress
+		SET
+		ifmaAddress1 = #{ifmaAddress1}
+		,ifmaAddress2 = #{ifmaAddress2}
+		,ifmaZipcode = #{ifmaZipcode}
+		,ifmaLat = #{ifmaLat}
+		,ifmaLng = #{ifmaLng}
+		,ifmmSeq = #{ifmmSeq}
+		WHERE
+			1 = 1
+		AND ifmmSeq = #{ifmmSeq}
+	</update>
+	
+	<update id="updateMemberNationality">
+		UPDATE
+		infrMemberNationality
+		SET
+		ifnSeq = #{ifnSeq}
+		,ifmmSeq = #{ifmmSeq}
+		WHERE
+			1 = 1
+		AND ifmmSeq = #{ifmmSeq}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM infrMember WHERE 1=1 AND ifmmSeq = #{ifmmSeq} <!-- 시퀀스가 같은 것을 
+			삭제시키겠다. -->
+	</delete>
+
+	<delete id="deleteNumber">
+		DELETE FROM infrMemberPhone WHERE 1=1 AND ifmmSeq = #{ifmmSeq}  <!-- 시퀀스가 
+			같은 것을 삭제시키겠다. -->
+	</delete>
+
+	<delete id="deleteEmail">
+		DELETE FROM infrMemberEmail WHERE 1=1 AND ifmmSeq = #{ifmmSeq}  <!-- 시퀀스가 
+			같은 것을 삭제시키겠다. -->
+	</delete>
+	<delete id="deleteAddress">
+		DELETE FROM infrMemberAddress WHERE 1=1 AND ifmmSeq = #{ifmmSeq}  <!-- 시퀀스가 
+			같은 것을 삭제시키겠다. -->
+	</delete>
+	<delete id="deleteNationality">
+		DELETE FROM infrMemberNationality WHERE 1=1 AND ifmmSeq = #{ifmmSeq}  <!-- 시퀀스가 
+			같은 것을 삭제시키겠다. -->
+	</delete>
+
+	<update id="updateDelete">
+		UPDATE
+		infrMember  <!-- 진짜 중요한게 테이블 이름틀리면 505 Error 불변임 -->
+		SET
+		ifmmDelNy = 1
+		WHERE 1=1
+		AND ifmmSeq = #{ifmmSeq}
+	</update>
+
+	<select id="selectOneLogin" resultMap="resultMapObj">
+		SELECT
+		ifmmSeq
+		, ifmmId
+		, ifmmName
+		, ifmmPassword
+		FROM
+		infrMember
+		WHERE
+		1 = 1
+		AND ifmmId = #{ifmmId}
+		AND ifmmPassword = #{ifmmPassword}
+	</select>
+	
+
+</mapper>
