@@ -4,7 +4,7 @@
 
 <mapper namespace="com.example.test.TestMapper">
 
-	<!-- <resultMap id="resultMapObj" type="com.example.test.Test"></resultMap> --> <!-- mybatis인가 이거 사용해주기 위해 쓰는거임 -->
+	<resultMap id="resultMapObj" type="com.example.test.Test"></resultMap> <!-- mybatis인가 이거 사용해주기 위해 쓰는거임 -->
 
 	
 	<select id="selectList" resultMap="resultMapObj">
