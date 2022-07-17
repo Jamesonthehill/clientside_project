@@ -23,14 +23,15 @@
 </head>
 
 <body>
-		<h1>❤안녕하세요. 행복한 서울시에 방문을 환영합니다😊</h1>>
+		<h1>❤안녕하세요. 행복한 서울시에 방문을 환영합니다😊</h1>
 
 
 	<table class="table table-hover">
 	<c:forEach items="${list}" var="item" varStatus="status">
 		<tr>
 			<td style="width: 50px;">번호</td>		
-			<td style="width: 50px;">주소</td>		
+			<td style="width: 50px;">주소1</td>		
+			<td style="width: 50px;">주소2</td>		
 			<td style="width: 50px;">호수</td>		
 			<td style="width: 50px;">평당가격</td>		
 			<td style="width: 50px;">번지수</td>		
@@ -39,6 +40,7 @@
 		<tr>
 			<td><c:out value="${item.gid}" /></td>		
 			<td><c:out value="${item.emd_cd}" /></td>		
+			<td><c:out value="${item.emd_nm}" /></td>		
 			<td><c:out value="${item.sgg_oid}" /></td>		
 			<td><c:out value="${item.col_adm_se}" /></td>		
 			<td><c:out value="${item.__gid}" /></td>		
