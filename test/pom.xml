@@ -86,7 +86,48 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>4.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.7</version>
+		</dependency>    
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.7</version>
+		</dependency>
 		<!-- poi library 2022.07-16 e -->
+			<!-- excel download s 2022.06.21 -->		
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.2.2</version>
+		</dependency> 
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>4.1.2</version>
+		</dependency> 
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>4.1.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!-- excel download e 2022.06.21 --> 
 		<!-- jstl/core 2022.07.17 s -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -129,7 +170,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- 뽀그리 의존성 추가 -->
+		<!-- 뽀그리 의존성 추가 2022.07.17 s -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
@@ -147,8 +188,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-jdbc</artifactId>
 			</dependency>
+		<!-- 뽀그리 의존성 추가 2022.07.17 e -->
 		</dependencies>
-
+				
 		<build>
 			<plugins>
 				<plugin>
