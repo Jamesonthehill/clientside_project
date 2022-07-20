@@ -5,7 +5,7 @@
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="EUC-KR">
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
@@ -23,20 +23,17 @@
 </head>
 
 <body>
+	 <div>
+        <h1>Excel Download</h1>
+        <form action="/excel/download" method="get">
+            <button type="submit">Excel</button>
+        </form>
+    </div>
 		<h1>❤안녕하세요. 행복한 서울시에 방문을 환영합니다😊</h1>
 
 
 	<table class="table table-hover">
-	<c:forEach items="${list}" var="item" varStatus="status">
-		<tr>
-			<td style="width: 50px;">번호</td>		
-			<td style="width: 50px;">주소1</td>		
-			<td style="width: 50px;">주소2</td>		
-			<td style="width: 50px;">호수</td>		
-			<td style="width: 50px;">평당가격</td>		
-			<td style="width: 50px;">번지수</td>		
-			<td>좌표</td>		
-		</tr>
+	<c:forEach items="${list}" var="item" varStatus="status"> <!--  list에 담긴 데이터를 item.[컬럼] 으로 사용하라는 선언 var가 없으면 list.[컬럼] -->
 		<tr>
 			<td><c:out value="${item.gid}" /></td>		
 			<td><c:out value="${item.emd_cd}" /></td>		
