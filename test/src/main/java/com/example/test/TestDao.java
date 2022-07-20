@@ -17,5 +17,5 @@ public class TestDao{
 	
 	private static String namespace="com.example.test.TestMapper";
 	
-	public List<com.example.test.Test> selectList(){ List<com.example.test.Test> list = sqlSession.selectList(namespace + ".selectList" ); return list;}
+	public List<Test> selectList(){ List<Test> list = sqlSession.selectList(namespace + ".selectList" ); return list;}
 }

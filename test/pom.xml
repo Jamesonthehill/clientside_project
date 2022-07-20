@@ -187,8 +187,16 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-jdbc</artifactId>
-			</dependency>
+			</dependency> 
 		<!-- 뽀그리 의존성 추가 2022.07.17 e -->
+		<!-- lombok 사용 Getter setter 2022.07.17 e -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.16.16</version>  
+			</dependency>
+		<!-- lombok 사용 Getter setter 2022.07.17 e -->
+		
 		</dependencies>
 				
 		<build>

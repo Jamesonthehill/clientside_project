@@ -4,13 +4,42 @@
 
 <mapper namespace="com.example.test.TestMapper">
 
-	<resultMap id="resultMapObj" type="com.example.test.Test"></resultMap> <!-- mybatis인가 이거 사용해주기 위해 쓰는거임 -->
-
-	
-	<select id="selectList" resultMap="resultMapObj">
+	<!-- <resultMap  type="com.example.test.Test"></resultMap> --> <!-- mybatis인가 이거 사용해주기 위해 쓰는거임 -->
+		
+<!-- 	<resultMap id="selectList" type="Test">
+		<id column="gid" property="gid"/>
+		<id column="emd_cd" property="emd_cd"/>
+		<id column="emd_nm" property="emd_nm"/>
+		<id column="sgg_oid" property="sgg_oid"/>
+		<id column="col_adm_se" property="col_adm_se"/>
+		<id column="geom" property="geom"/>
+	</resultMap> -->
+<!-- 	<select id="selectList" resultType="Test">
 		SELECT * FROM lsmd_adm_sect_umd_11;
+	</select> -->
+	<select id="selectList" resultType="Test">
+		SELECT
+			gid
+			,emd_cd
+			,emd_nm
+			,sgg_oid
+			,col_adm_se
+			,__gid
+			,geom
+		FROM
+			lsmd_adm_sect_umd_11
+		WHERE 1 = 1
 	</select>
+	<!-- <select>
+	SELECT 
+		id
+		,name
+		,engname
+	FROM infrName
+	WHERE 1=1 
 	
+	</select>
+	 -->
 	
 	
 </mapper>

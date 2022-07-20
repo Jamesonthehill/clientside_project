@@ -15,7 +15,7 @@ public class TestServiceImpl implements TestService {
 	TestDao dao;
 	
 	@Override
-	public List<com.example.test.Test> selectList() throws Exception {
+	public List<Test> selectList() throws Exception {
 		
 		return dao.selectList();
 	}
