@@ -36,9 +36,13 @@
     </div>
     <div>
       <form class="d-flex">
-        <input class="form-control me-2" type="text"  index="getResolutionFromScale" placeholder="축적" >
-        <input class="form-control me-2" type="text" placeholder="좌표" >
-        <input class="form-control me-2" type="text" placeholder="위도" ><input class="form-control me-2" type="text" placeholder="경도" >
+        <input id="scale" class="form-control me-2" type="text" placeholder="축적" >
+        <select id="DATA_KOR_NM" class="form-control me-2">
+        	<option></option>
+        	<option></option>
+        	<option></option>
+        </select>
+        <input id="" class="form-control me-2" type="text" placeholder="위도" ><input class="form-control me-2" type="text" placeholder="경도" >
       </form>
     </div>
   </div>
@@ -55,19 +59,24 @@
 			  <button type="button" class="btn btn-outline-primary form-control map-change-button" value="KAKAO">Kakao</button>
 			  <button type="button" class="btn btn-outline-primary form-control map-change-button" value="VWORLD">Vworld</button>
 			</div>
+				<select class="form-control me-2" style="margin-top: 5px;">
+					<option>사용자 레이어</option>
+					<option></option>
+					<option></option>
+				</select>
+			</div>
 			<div class="toolbar">
-				<button id="zoomIn" type="button" class="btn btn-light"><i class="fa-solid fa-plus"></i></button>
-			  	<button id="zoomOut" type="button" class="btn btn-light"><i class="fa-solid fa-minus"></i></button> 
-			  	<button id="prev" type="button" class="btn btn-light"><i class="fa-solid fa-angle-left" style="width:12px;height:6px;"></i></button>
-			  	<button id="next" type="button" class="btn btn-light"><i class="fa-solid fa-angle-right" style="width:12px;height:6px;"></i></button>
-			  	<button id="clear" type="button" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-right"></i></button> 
-			  	<button id="distanceBtn" type="button" class="btn btn-light"><i class="fa-solid fa-ruler"></i></button>
-			  	<button id="measurementBtn" type="button" class="btn btn-light" style=""><i class="fa-solid fa-pencil"></i></button> 
-			  	<button id="save" type="button" class="btn btn-light" style=""><i class="fa-solid fa-download"></i></button>
-			  	<button id="IndexMap" type="button" class="btn btn-light" style=""><i class="fa-solid fa-map"></i></button>
+				<button id="zoomIn" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-plus"></i></button>
+			  	<button id="zoomOut" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-minus"></i></button> 
+			  	<button id="prev" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-angle-left" style="width:12px;height:6px;"></i></button>
+			  	<button id="next" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-angle-right" style="width:12px;height:6px;"></i></button>
+			  	<button id="clear" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-arrow-rotate-right"></i></button> 
+			  	<button id="distanceBtn" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-ruler"></i></button>
+			  	<button id="measurementBtn" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-pencil"></i></button> 
+			  	<button id="save" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-download"></i></button>
+			  	<button id="indexMap" type="button" class="btn btn-light" style="margin-top: 5px;"><i class="fa-solid fa-map"></i></button>
 		  	</div>
 	  	</div>
-	</div>
 		
 	<!-- 지도 영역  -->
 		
