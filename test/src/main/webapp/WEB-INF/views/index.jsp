@@ -32,20 +32,19 @@
   <div class="container-fluid">
   	<div>
   	
-    <a href="http://localhost:5050/index/" style="float:left;"><img src="images/geotwo.png" style="width:50px;height:50px;">GEO2SEOUL</a>
+    <a href="http://localhost:5050/index/" style="float:left;"><img src="images/geotwo.png" style="width:50px;height:50px;"></a>
     </div>
     <div>
       <form class="d-flex">
-        축척 : <input class="form-control me-2" type="text"  index="getResolutionFromScale" placeholder="축적" >
-        좌표 : <input class="form-control me-2" type="text" placeholder="좌표" >
-        위도/경도 : <input class="form-control me-2" type="text" placeholder="위도" ><input class="form-control me-2" type="text" placeholder="경도" >
+        <input class="form-control me-2" type="text"  index="getResolutionFromScale" placeholder="축적" >
+        <input class="form-control me-2" type="text" placeholder="좌표" >
+        <input class="form-control me-2" type="text" placeholder="위도" ><input class="form-control me-2" type="text" placeholder="경도" >
       </form>
     </div>
   </div>
 </nav>
 
   <!-- Navbar content -->
-	<hr>
 		<!-- kakao / vworld -->
 	<div class="container-fluid">
 	<!-- vworld 지도  -->	
@@ -64,7 +63,7 @@
 			  	<button id="clear" type="button" class="btn btn-light"><i class="fa-solid fa-arrow-rotate-right"></i></button> 
 			  	<button id="distanceBtn" type="button" class="btn btn-light"><i class="fa-solid fa-ruler"></i></button>
 			  	<button id="measurementBtn" type="button" class="btn btn-light" style=""><i class="fa-solid fa-pencil"></i></button> 
-			  	<button id="save" type="button" class="btn btn-light" style=""><i class="fa-solid fa-map"></i></button>
+			  	<button id="save" type="button" class="btn btn-light" style=""><i class="fa-solid fa-download"></i></button>
 			  	<button id="IndexMap" type="button" class="btn btn-light" style=""><i class="fa-solid fa-map"></i></button>
 		  	</div>
 	  	</div>
