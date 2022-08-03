@@ -24,13 +24,12 @@
 <!-- O2Platform SDK Example -->		      			
 <title id="ctl00_headerTitle">GEO2, SEOUL!</title>
 
-<!-- <style>
+<style>
 	li {
 			list-style-image: url("images/dot.png");
-			width: 2px;
-			height: 2px;
+			margin-right: 10px;
 		}
-	</style> -->
+	</style>
 						
 </head>
 <body>
@@ -54,27 +53,15 @@
 				<div class="row">
 				  <div class="col">
 				    <div class="collapse multi-collapse" id="multiCollapseExample1">
-				      <div class="card card-body" style="width:200px;"> 
-				      <table>	
-				      		<c:forEach var="list" items="${list}" varStatus="status">
-				      		<tr>
-						      	<td>
-								<input type="text" id="alpha" name="${list.ROLENAMENY }" class="form-check-input">
-				      			</td>
-				      		</tr>
-				      		</c:forEach>
-				      		<tr>
-						      	<td><input type="checkbox" class="form-check-input" style="margin-top:10px;"></td>
-						      	<td></td>
-				      		</tr>
-				      		<tr>
-						      	<td><input type="checkbox" class="form-check-input" style="margin-top:10px;"></td>
-						      	<td></td>
-				      		</tr>
-				      		<tr>
-						      	<td><input type="checkbox" class="form-check-input" style="margin-top:10px;"></td>
-						      	<td></td>
-				      		</tr>
+				      <div class="card card-body" style="width:250px;"> 
+				      <div class="upDown">
+				      <button class="form-control" style="border:none;"><i class="fa-solid fa-caret-down"></i></button>
+				      <button class="form-control" style="border:none;margin-left:5px;"><i class="fa-solid fa-caret-up"></i></button>
+				      </div>
+				      <hr>
+				      <table id="layer-list">
+				      	<tbody>	
+			      		</tbody>
 				      </table>
 				      </div>
 				    </div>
@@ -82,16 +69,17 @@
 				</div>
 			</div>
 			<div class="toolbar">
-				<button id="no1" type="button" class="" style="margin-top: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/></svg></button>
-				<button id="zoomIn" type="button" class=""><i class="fa-solid fa-plus"></i></button>
-			  	<button id="zoomOut" type="button" class="" ><i class="fa-solid fa-minus"></i></button> 
-			  	<button id="prev" type="button" class="" ><i class="fa-solid fa-angle-left" style="width:12px;height:6px;"></i></button>
-			  	<button id="next" type="button" class="" ><i class="fa-solid fa-angle-right" style="width:12px;height:6px;"></i></button>
-			  	<button id="clear" type="button" class="" style="margin-top: 10px;"><i class="fa-solid fa-arrow-rotate-right"></i></button> 
-			  	<button id="distanceBtn" type="button" class=""><i class="fa-solid fa-ruler"></i></button>
-			  	<button id="measurementBtn" type="button" class=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/></svg></button> 
-			  	<button id="save" type="button" class="" style="margin-top: 5px;"><i class="fa-solid fa-download"></i></button>
-			  	<button id="no2" type="button" class="" style="margin-top: 5px;"><i class="fa-solid fa-magnifying-glass"></i></button>
+				<button id="def" type="button" class="form-control" style="margin-top: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/></svg></button>
+				<button id="zoomIn" type="button" class="form-control"><i class="fa-solid fa-plus"></i></button>
+			  	<button id="zoomOut" type="button" class="form-control" ><i class="fa-solid fa-minus"></i></button> 
+			  	<button id="prev" type="button" class="form-control" ><i class="fa-solid fa-angle-left" style="width:12px;height:6px;"></i></button>
+			  	<button id="next" type="button" class="form-control" ><i class="fa-solid fa-angle-right" style="width:12px;height:6px;"></i></button>
+			  	<button id="clear" type="button" class="form-control" style="margin-top: 10px;"><i class="fa-solid fa-arrow-rotate-right"></i></button> 
+			  	<button id="distanceBtn" type="button" class="form-control"><i class="fa-solid fa-ruler"></i></button>
+			  	<button id="measurementBtn" type="button" class="form-control"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fullscreen" viewBox="0 0 16 16"><path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/></svg></button> 
+			  	<button id="save" type="button" class="form-control" style="margin-top: 5px;"><i class="fa-solid fa-download"></i></button>
+			  	<button id="circle" type="button" class="form-control" style="margin-top: 5px;"><i class="fa-regular fa-circle"></i></button>
+			  	<button id="no2" type="button" class="form-control" style="margin-top: 5px;"><i class="fa-solid fa-magnifying-glass"></i></button>
 		  	</div>
 	  	</div>
 	<!-- 지도 영역  -->
@@ -115,22 +103,19 @@
 		    <a href="http://localhost:5050/index/" style="float:left;"><img src="images/geotwo.png" style="width:50px;height:50px;"></a>
 		    </div>
 		    
-		    <div>
+		    <div style="margin-left:300px;">
 		      <form class="d-flex">
-				<label for="alpha" style="margin-right:5px;vertical-align:middle;"><li><span>위치</span></li></label>
-		        <select id="alpha" class="me-2">
-		        	<option></option>
-		        	<option></option>
-		        	<option></option>
+				<label for="location" style="margin-right:5px;vertical-align:middle;"><li><span>위치</span></li></label>
+		        <select id="location" class="me-2" style="widht:200px;margin:auto;">
 		        </select>
 				<label for="scale"><li>축척</li></label>
-		        <input id="scale" class="me-2" type="text" placeholder="축적" >
-		    	<ul><li>좌표</li></ul>
-		        <input id="" class="me-2" type="text" placeholder="위도">
-		        <input class="me-2" type="text" placeholder="경도" >
-		      	<button id="indexMap" type="button" class="btn btn-light"><i class="fa-solid fa-globe"></i></button>
+		        <input id="scale" class="me-2" type="text" style="width:200px;margin:auto;" placeholder="축적" >
+		        <label for="beta"><li style="padding-left:50px;">좌표</li></label>
+		        <input id="beta" type="text" class="me-2" style="width:200px;" placeholder="위도">
+		        <input id="beta" type="text" class="me-2" style="width:200px;" placeholder="경도" >
 		      </form>
 		    </div>
+		      	<button id="indexMap" name="offIndexMap" type="button" class="btn btn-light"><i class="fa-solid fa-globe"></i></button>
 		  </div>
 		</nav>
 		<!-- Navbar 끝 -->
@@ -143,10 +128,12 @@
 	<!-- O2Platform SDK Example -->		      			
 	<script src="https://kit.fontawesome.com/b322818db5.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="http://localhost:8081/o2.platform/build/dist/o2sdk.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+	<script src="http://localhost:8081/o2.platform/build/dist/o2sdk.js"></script>
 	<script type="text/javascript" src="js/tools.js"></script>
 	<script type="text/javascript" src="js/layers.js"></script>
+	<script type="text/javascript" src="js/onOff.js"></script>
+	<script type="text/javascript" src="js/location.js"></script>
 	<!-- proxy.jsp 연동  -->
 	<script>
 	//proxy.jsp를 통한 describeLayer API 호출
@@ -183,6 +170,9 @@
 	o2.common.Config.HOST.VALUES.PLATFORM_HOST = "http://localhost:8081/o2.platform";
 	//어플리케이션 프록시 사용 여부
 	o2.common.Config.HOST.VALUES.USE_PROXY = true;
+	
+	o2.common.Config.MAP.VALUES.MAP_NM = "index"; 
+	//지도값 세팅
 
 	</script>
 	
