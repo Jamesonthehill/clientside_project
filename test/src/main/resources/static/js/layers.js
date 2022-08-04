@@ -22,7 +22,7 @@
 					
 					let tr = document.createElement('tr');
 					tr.innerHTML += `<td>`;
-					tr.innerHTML += `	<input type="checkbox" id="checkbox${index}" class="boxWrap" style="zoom:2.0;margin-top:10px;">`;
+					tr.innerHTML += `	<input type="checkbox" id="checkbox${index}" style="zoom:2.0;margin-top:10px;">`;
 					tr.innerHTML += `	<label for="checkbox${index}" style="padding-left:20px;"><font size="4">${value.DATA_KOR_NM}</font></label>`;
 					tr.innerHTML += `</td>`;
 					
@@ -67,6 +67,33 @@
 						alert("레이어 작동 오류")
 					}
 					// layer 불러오는 방법 e 
+					
+					// layer on/Off s					
+					var layerChkBox = document.querySelectorAll('input[type=checkbox][name=layers]');
+	
+					for(var checkbox of layerChkBox) {
+						checkbox.addEventListener('change', function(e) {
+							var checkedLayer = map.getO2LayerById(e.target.id);
+							var checkedLayerId = checkedLayer.values_.id;
+							
+				            if(e.target.checked) {
+								if(e.target.id == checkedLayer.values_.id) {
+									checkedLayer.setVisible(true);
+									url = "/"+o2.common.Config.HOST.VALUES.APP_CONTEXT_PATH+"/updateLayerVisible.do"
+									param = {checkedLayerId: checkedLayerId, checkedLayerVisible: 'Y'};
+									updateLayer(url, param);
+								}
+							} else {
+								if(e.target.id == checkedLayer.values_.id) {
+									checkedLayer.setVisible(false);
+									param = {checkedLayerId: checkedLayerId, checkedLayerVisible: 'N'};
+									url = "/"+o2.common.Config.HOST.VALUES.APP_CONTEXT_PATH+"/updateLayerVisible.do";
+									updateLayer(url, param);
+								}
+							}
+						});
+					}
+ 					// layer On/OFF e
 					
 				});
 				
