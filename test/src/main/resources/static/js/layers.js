@@ -51,10 +51,14 @@
 						
 					});
 						
-					tr.querySelector('font').addEventListener('mousedown', () => {
+					tr.querySelector('font').addEventListener('mouseup', () => {
 						
-						console.log("우클릭이벤트 가즈아")
-					
+						let div = document.createElement('div');
+						
+						console.log("우클릭이벤트 실시")
+						div.innerHTML += `<div style="border-radius:30px;width:200px;height:260px;background-color:white;">`;
+						div.innerHTML += `<input type="checkbox">`;
+						div.innerHTML += `</div>`;
 					});	
 					// layer 불러오는 방법
 					const layer = new o2.layer.O2Layer({
